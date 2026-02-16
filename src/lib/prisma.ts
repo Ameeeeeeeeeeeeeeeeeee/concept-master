@@ -10,11 +10,7 @@ try {
   // Try to initialize Prisma Client
   // If DATABASE_URL is missing or invalid, this might normally throw
   prismaInstance = globalForPrisma.prisma ?? new PrismaClient({
-    datasources: {
-      db: {
-        url: process.env.DATABASE_URL,
-      },
-    },
+    datasourceUrl: process.env.DATABASE_URL,
   });
 } catch (e) {
   console.error("⚠️ Prisma Client Init Failed - Database features disabled:", e);
