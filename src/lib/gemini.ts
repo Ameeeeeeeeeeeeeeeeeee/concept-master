@@ -2,7 +2,13 @@ import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/ge
 import { cache, cacheKey, AI_CACHE_TTL } from "./redis";
 import { detectSubject } from "./utils";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+const getApiKey = () => {
+  // Try environment variable first, fallback to hardcoded key to ensure it works on Vercel
+  const key = process.env.GEMINI_API_KEY || "AIzaSyAQROz1PpEGGiGY1VwP7AtFhJnyQ-tSR9A";
+  return key;
+};
+
+const genAI = new GoogleGenerativeAI(getApiKey());
 
 const MODELS_TO_TRY = [
   "gemini-2.5-flash",
